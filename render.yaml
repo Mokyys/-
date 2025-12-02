@@ -1,0 +1,13 @@
+# Файл render.yaml
+services:
+  - type: web
+    name: my-tg-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app
+    # ----------------------------------------------------
+    # Добавляем preBuildHook для установки системных пакетов
+    # ----------------------------------------------------
+    preBuildHook: |
+      apt-get update
+      apt-get install -y build-essential libpq-dev
